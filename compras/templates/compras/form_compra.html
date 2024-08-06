@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+<!---->
+{% block title %}Registrar Solicitud De Productos o Servicios {% endblock %}
+<!---->
+{%block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-12 mb-2">
+    <h1 class="text-center text-uppercase">
+      ORDEN DE COMPRA O SERVICIO
+      <a
+        style="color: #14ad47; float: right; padding: 0px 10px 0px 0px"
+        href="{% url 'view_form_carga_masiva' %}">
+        <i class="bi bi-person-fill-up"></i>
+      </a>
+      <hr />
+    </h1>
+  </div>
+</div>
+
+<div class="row justify-content-md-center">
+  <form
+    name="form_compra"
+    method="POST"
+    action="{% url 'registrar_compras' %}"
+    class="row justify-content-md-center g-3"
+    enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-md-5">
+      <label for="descripcion" class="form-label">
+        Descripcion
+      </label>
+      <input type="text" name="descripcion" class="form-control" required />
+    </div>
+    <div class="col-md-5">
+      <label for="codigo_cotizacion" class="form-label">
+        Numero Codigo o Numero Cotizacion
+      </label>
+      <input
+        type="text"
+        name="codigo_cotizacion"
+        class="form-control"
+        required />
+    </div>
+<div class="col-md-5">
+      <label for="precio" class="form-label">
+        Precio
+      </label>
+      <input
+        type="text"
+        name="precio"
+        class="form-control"
+        required />
+    </div>
+    <div class="col-md-5">
+      <label for="cantidad" class="form-label">
+        Cantidad
+      </label>
+      <input type="text" name="cantidad" class="form-control" required />
+    </div>
+    <div class="col-md-5">
+      <label for="empresa" class="form-label">
+        Empresa
+      </label>
+      <input type="text" name="empresa" class="form-control" required />
+    </div>
+  <div class="col-md-5">
+  <label for="destino" class="form-label">Destino</label>
+  <select name="destino" class="form-control" required>
+    <option value="ADMINISTRACIÓN">ADMINISTRACIÓN</option>
+    <option value="PRODUCCION">PRODUCCION</option>
+    <option value="ALEVINERA">ALEVINERA</option>
+    <option value="ECOPEZ">ECOPEZ</option>
+    <option value="FERRY">FERRY</option>
+    <option value="CARRO VNS228">CARRO VNS228</option>
+    <option value="CARRO WGY">CARRO WGY</option>
+    <option value="CARRO THS 473">CARRO THS 473</option>
+    <option value="CARRO PESCA SRP 254">CARRO PESCA SRP 254</option>
+    <option value="TERMOKIN GQZ 727">TERMOKIN GQZ 727</option>
+    <option value="TERMOKIN GRK 030">TERMOKIN GRK 030</option>
+    <option value="THERMO KING THS 592">THERMO KING THS 592</option>
+    <option value="UNIDAD COMERCIALIZACION">UNIDAD COMERCIALIZACION</option>
+  </select>
+</div>
+        <div class="col-md-5">
+          <label for="tiempo_entrega" class="form-label">
+            Tiempo de Entrega
+          </label>
+          <input type="text" name="tiempo_entrega" class="form-control" required />
+        </div>
+         <div class="col-md-5">
+           <label for="observaciones" class="form-label">
+             Observaciones
+           </label>
+           <input type="text" name="observaciones" class="form-control" required />
+         </div>     
+
+    <div class="col-md-5">
+      <label for="" class="form-label"> Cargar foto del Producto o Servicio </label>
+      <input
+        type="file"
+        name="foto_producto"
+        class="form-control form-control-sm"
+        required />
+    </div>
+    <div class="col-md-5"></div>
+
+    <div class="d-grid gap-2 col-8 mx-auto mt-5">
+      <button class="btn btn-primary" type="submit">
+        Registrar Solicitud
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

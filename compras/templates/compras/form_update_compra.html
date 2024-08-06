@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+<!---->
+{% block title %}Actualizar Datos de la Compra{% endblock %}
+<!---->
+{%block content %}
+{% load static %}
+
+<div class="row justify-content-center">
+  <div class="col-md-12 mb-2">
+    <h1 class="text-center text-uppercase">
+      <a style="float: left" href="{% url 'inicio' %}">
+        <span><i class="bi bi-arrow-left-circle"></i></span>
+      </a>
+      Datos de la Solicitud
+      <hr />
+    </h1>
+  </div>
+</div>
+
+<div class="row justify-content-md-center">
+  <form
+    name="form_compra"
+    method="POST"
+    action="{% url 'actualizar_compra' compra.id %}"
+    class="row justify-content-md-center g-3"
+    enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <div class="col-md-5">
+      <label for="descripcion" class="form-label">
+        Descripcion
+      </label>
+      <input
+        type="text"
+        name="descripcion"
+        value="{{ compra.descripcion }}"
+        class="form-control"
+        required />
+    </div>
+    <div class="col-md-5">
+      <label for="codigo_cotizacion" class="form-label">
+        Numero Codigo o Numero Cotizacion
+      </label>
+      <input
+        type="text"
+        name="codigo_cotizacion"
+        value="{{ compra.codigo_cotizacion }}"
+        class="form-control"
+        required />
+    </div>
+    <div class="col-md-5">
+      <label for="precio" class="form-label">
+        Precio
+      </label>
+      <input
+        type="text"
+        name="precio"
+        value="{{ compra.precio }}"
+        class="form-control"
+        required />
+    </div>
+
+    <div class="col-md-5">
+      <label for="cantidad" class="form-label">
+        Cantidad
+      </label>
+      <input
+        type="text"
+        name="cantidad"
+        value="{{ compra.cantidad }}"
+        class="form-control"
+        required />
+    </div>
+    <div class="col-md-5">
+      <label for="empresa" class="form-label">
+        Empresa
+      </label>
+      <input
+        type="text"
+        name="empresa"
+        value="{{ compra.empresa }}"
+        class="form-control"
+        required />
+    </div>
+
+    <div class="col-md-5">
+  <label for="destino" class="form-label">Destino</label>
+  <select name="destino" class="form-control" required>
+    <option value="ADMINISTRACIÓN" {% if compra.destino = "ADMINISTRACIÓN" %}selected{% endif %}>ADMINISTRACIÓN</option>
+    <option value="PRODUCCION" {% if compra.destino = "PRODUCCION" %}selected{% endif %}>PRODUCCION</option>
+    <option value="ALEVINERA" {% if compra.destino = "ALEVINERA" %}selected{% endif %}>ALEVINERA</option>
+    <option value="ECOPEZ" {% if compra.destino = "ECOPEZ" %}selected{% endif %}>ECOPEZ</option>
+    <option value="FERRY" {% if compra.destino = "FERRY" %}selected{% endif %}>FERRY</option>
+    <option value="CARRO VNS228" {% if compra.destino = "CARRO VNS228" %}selected{% endif %}>CARRO VNS228</option>
+    <option value="CARRO WGY" {% if compra.destino = "CARRO WGY" %}selected{% endif %}>CARRO WGY</option>
+    <option value="CARRO THS 473" {% if compra.destino = "CARRO THS 473" %}selected{% endif %}>CARRO THS 473</option>
+    <option value="CARRO PESCA SRP 254" {% if compra.destino = "CARRO PESCA SRP 254" %}selected{% endif %}>CARRO PESCA SRP 254</option>
+    <option value="TERMOKIN GQZ 727" {% if compra.destino = "TERMOKIN GQZ 727" %}selected{% endif %}>TERMOKIN GQZ 727</option>
+    <option value="TERMOKIN GRK 030" {% if compra.destino = "TERMOKIN GRK 030" %}selected{% endif %}>TERMOKIN GRK 030</option>
+    <option value="THERMO KING THS 592" {% if compra.destino = "THERMO KING THS 592" %}selected{% endif %}>THERMO KING THS 592</option>
+    <option value="UNIDAD COMERCIALIZACION" {% if compra.destino = "UNIDAD COMERCIALIZACION" %}selected{% endif %}>UNIDAD COMERCIALIZACION</option>
+  </select>
+</div>
+    
+    <div class="col-md-5">
+      <label for="tiempo_entrega" class="form-label">
+        Tiempo de Entrega
+      </label>
+      <input
+        type="text"
+        name="tiempo_entrega"
+        value="{{ compra.tiempo_entrega }}"
+        class="form-control"
+        required />
+    </div>
+    
+        <div class="col-md-5">
+          <label for="observaciones" class="form-label">
+             Observaciones
+          </label>
+          <input
+            type="text"
+            name="observaciones"
+            value="{{ compra.observaciones }}"
+            class="form-control"
+            required />
+        </div>
+    <div class="col-md-5">
+      <label for="" class="form-label"> Cargar foto de la compra </label>
+      <input
+        type="file"
+        name="foto_producto"
+        class="form-control form-control-sm"
+         />
+    </div>
+    <div class="col-md-5">
+        <label for="" class="form-label"> Foto actual del Producto/Servicio </label>
+        {% if compra.foto_producto %}
+          <!---->
+          {% if compra.es_extension_valida %}
+          <img
+            class="foto_producto"
+            src="{{ compra.foto_producto.url }}"
+            alt="Foto de {{ compra.descripcion }}"
+            width="50" />
+          {% else %}
+          <img
+            class="foto_producto"
+            src="{% static 'imgs/compra_defaul.jpg'%}"
+            alt="Sin foto"
+            width="50" />
+          {% endif %} {% endif %}
+    </div>
+
+    <div class="d-grid gap-2 col-8 mx-auto mt-5">
+      <button class="btn btn-primary" type="submit">
+        Actualizar Datos de la Compra
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
